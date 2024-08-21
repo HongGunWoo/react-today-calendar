@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+
+    "jsx": "react-jsx",
+    "lib": ["dom", "dom.iterable", "ESNext", "ESNext.AsyncIterable"],
+    "target": "ES6",
+
+    "forceConsistentCasingInFileNames": true,
+
+    "allowJs": false,
+    "skipLibCheck": true,
+
+    "declaration": true,
+    "sourceMap": true,
+    "declarationDir": "./dist",
+    "rootDir": "./src",
+    "emitDeclarationOnly": true
+  },
+  "include": ["src"],
+  "exclude": ["./dist", "./node_modules", "./esm", "./src/**/*.test.tsx", "./src/**/*.stories.tsx"]
+}
