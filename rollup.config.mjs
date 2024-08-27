@@ -18,31 +18,42 @@ function external(pkg) {
   });
 }
 
-export default {
-  input: './src/index.ts',
-  external,
-  plugins: [
-    nodeResolve({ extensions }),
-    commonjs(),
-    peerDepsExternal(),
-    babel({
-      extensions,
-      babelHelpers: 'bundled',
-      presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-    }),
-    // ...(output.format === 'cjs' ? [typescript({ tsconfig: './tsconfig.json' })] : []),
-  ],
-  output: [
-    {
-      dir: './esm',
-      format: 'es',
-      preserveModules: true,
-      preserveModulesRoot: './src',
-    },
-    {
-      file: './dist/index.js',
-      format: 'cjs',
-      preserveModules: false,
-    },
-  ],
-};
+function build(format) {
+  const isEsmFormat = format === 'es';
+
+  return {
+    input: './src/index.ts',
+    external,
+    plugins: [
+      nodeResolve({ extensions }),
+      commonjs(),
+      peerDepsExternal(),
+      babel({
+        extensions,
+        babelHelpers: 'bundled',
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-react',
+          '@babel/preset-typescript',
+        ],
+      }),
+      !isEsmFormat && typescript({ tsconfig: './tsconfig.json' }),
+    ],
+    output: [
+      {
+        format,
+        preserveModules: isEsmFormat,
+        ...(isEsmFormat
+          ? {
+              dir: './esm',
+              preserveModulesRoot: './src',
+            }
+          : {
+              file: './dist/index.js',
+              sourcemap: true,
+            }),
+      },
+    ],
+  };
+}
+export default [build('es'), build('cjs')];

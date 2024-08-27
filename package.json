@@ -17,8 +17,8 @@
     "esm"
   ],
   "scripts": {
-    "build": "rm -rf dist/ && rm -rf esm/ && rollup -c && tsc -p tsconfig.json",
-    "watch": "rm -rf dist/ && rm -rf esm/ && rollup -cw && tsc -p tsconfig.json"
+    "build": "rm -rf dist/ && rm -rf esm/ && rollup -c",
+    "watch": "rm -rf dist/ && rm -rf esm/ && rollup -cw"
   },
   "dependencies": {
     "date-fns": "^3.6.0"
