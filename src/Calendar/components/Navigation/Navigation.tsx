@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { useCalendarContext } from '../../providers/CalendarContext';
 import { PropsWithChildren, ReactNode } from 'react';
 import { addMonths, addYears, subMonths, subYears } from 'date-fns/fp';
@@ -43,7 +42,7 @@ export const Navigation = ({
     onSelectedDateChange(new Date());
   };
 
-  const navigationTitle = format(selectedDate, 'yyyy년 MM월');
+  const navigationTitle = formatTitleDate(new Date());
 
   return (
     <div className={classNames.navigation()}>
@@ -55,3 +54,12 @@ export const Navigation = ({
     </div>
   );
 };
+
+function formatTitleDate(date: Date, locale?: Intl.LocalesArgument) {
+  const formattedDate = new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+  }).format(date);
+
+  return formattedDate;
+}
