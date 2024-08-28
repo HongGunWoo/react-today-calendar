@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { classNames } from './classNames';
-import { Navigation } from './components/Navigation/Navigation';
 import { CalendarContextProvider } from './providers/CalendarContext';
+import { Navigation, View } from './components';
 
 export function Calendar({ children }: PropsWithChildren) {
   return (
@@ -12,3 +12,4 @@ export function Calendar({ children }: PropsWithChildren) {
 }
 
 Calendar.Navigation = Navigation;
+Calendar.View = View;
